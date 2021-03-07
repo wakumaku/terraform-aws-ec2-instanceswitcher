@@ -25,12 +25,11 @@ module "instanceswitcher" {
   # https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
   schedules = {
     start = [
-      "0 8 ? * MON,FRI *",
-      "0 10 ? * SAT *",
-      "0 10 ? * SUN *",
+      "0 8 ? * MON-FRI *",
+      "0 10 ? * SAT,SUN *",
     ]
     stop = [
-      "0 18 ? * MON,FRI *",
+      "0 18 ? * MON-FRI *",
       "0 16 ? * SAT *",
       "0 14 ? * SUN *",
     ]

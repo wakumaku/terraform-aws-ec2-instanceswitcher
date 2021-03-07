@@ -6,6 +6,7 @@ variable "prefix" {
 variable "instance_list" {
   description = "Instance(s) to be switched started, stopped, rebooted or terminated"
   type        = list(string)
+  default     = []
 }
 
 variable "schedules" {
