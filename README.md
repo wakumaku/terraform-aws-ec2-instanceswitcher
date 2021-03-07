@@ -10,7 +10,8 @@ Example use case:
 
 ```terraform
 module "instanceswitcher" {
-  source = "./instanceswitcher"
+  source  = "wakumaku/ec2-instanceswitcher/aws"
+  version = "0.0.1"
 
   # Prefix to be used in created resources
   prefix = "devel_stack"
