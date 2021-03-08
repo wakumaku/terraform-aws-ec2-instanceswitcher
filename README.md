@@ -9,6 +9,17 @@ Example use case:
 * We want to start a development environment at 10 and stop it at 14 on sundays.
 
 ```terraform
+data "aws_instances" "dev" {
+  filter {
+    name = "tag:Name"
+    values = [
+      "dev_1",
+      "dev_db",
+      "devel_platform",
+    ]
+  }
+}
+
 module "instanceswitcher" {
   source  = "wakumaku/ec2-instanceswitcher/aws"
   version = "x.y.z"
@@ -17,9 +28,7 @@ module "instanceswitcher" {
   prefix = "devel_stack"
 
   # Which instances will be affected
-  instance_list = [
-    "i-asdfghj123456poiu"
-  ]
+  instance_list = data.aws_instances.dev.ids
 
   # Schedules in cron expression format
   # https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
@@ -45,8 +54,6 @@ module "instanceswitcher" {
   }
 }
 ```
-
-NOTE: you can pass to the `instance_list` the resulting `ids` from an [aws_instances data source](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/instances) output.
 
 This code will create 6 EventBridge Rules, one for each scheduled time, that will execute a lambda to perform the action.
 
