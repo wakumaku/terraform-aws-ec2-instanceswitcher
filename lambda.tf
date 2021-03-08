@@ -48,6 +48,7 @@ resource "aws_iam_policy" "ec2_start_stop" {
   "Statement": [
     {
       "Action": [
+        "ec2:DescribeInstances",
         "ec2:DescribeInstanceStatus",
         "ec2:StartInstances",
         "ec2:StopInstances"
@@ -74,6 +75,7 @@ resource "aws_iam_policy" "ec2_reboot" {
     {
       "Action": [
         "ec2:DescribeInstances",
+        "ec2:DescribeInstanceStatus",
         "ec2:RebootInstances"
       ],
       "Effect": "Allow",
@@ -97,6 +99,8 @@ resource "aws_iam_policy" "ec2_terminate" {
   "Statement": [
     {
       "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeInstanceStatus",
         "ec2:TerminateInstances"
       ],
       "Effect": "Allow",
