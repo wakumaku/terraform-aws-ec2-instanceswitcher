@@ -16,6 +16,10 @@ resource "aws_iam_role" "lambda" {
 }
 EOF
 
+  path = var.role_path
+
+  permissions_boundary = var.role_permissions_boundary
+
   tags = local.tags_base
 }
 
@@ -35,6 +39,8 @@ resource "aws_cloudwatch_log_group" "lambda" {
 resource "aws_iam_policy" "ec2_start_stop" {
   name        = "${var.prefix}-instanceswitcher-start-stop"
   description = "Instance switcher lambda policy to be able to start or stop instances"
+
+  path = var.policies_path
 
   policy = <<EOF
 {
@@ -59,6 +65,8 @@ resource "aws_iam_policy" "ec2_reboot" {
   name        = "${var.prefix}-instanceswitcher-reboot"
   description = "Instance switcher lambda policy to reboot instances"
 
+  path = var.policies_path
+
   policy = <<EOF
 {
   "Version": "2012-10-17",
@@ -80,6 +88,8 @@ EOF
 resource "aws_iam_policy" "ec2_terminate" {
   name        = "${var.prefix}-instanceswitcher-terminate"
   description = "Instance switcher lambda policy to terminate instances"
+
+  path = var.policies_path
 
   policy = <<EOF
 {

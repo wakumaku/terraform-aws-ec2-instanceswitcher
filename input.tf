@@ -27,6 +27,24 @@ variable "schedules" {
   }
 }
 
+variable "role_permissions_boundary" {
+  type        = string
+  description = "ARN of the policy that is used to set the permissions boundary for the role."
+  default     = null
+}
+
+variable "role_path" {
+  type        = string
+  description = "Path to the role."
+  default     = "/"
+}
+
+variable "policies_path" {
+  type        = string
+  description = "Path in which to create the policy."
+  default     = "/"
+}
+
 variable "tags" {
   description = "Custom tags to be added to the created resources"
   type        = map(string)
