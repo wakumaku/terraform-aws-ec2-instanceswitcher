@@ -4,6 +4,9 @@ variable "schedules" {}
 variable "instance_list" {}
 variable "lambda_arn" {}
 variable "lambda_name" {}
+variable "event_bus_name" {
+  default = null
+}
 variable "tags" {}
 
 resource "aws_cloudwatch_event_rule" "instanceswitcher" {
@@ -11,6 +14,8 @@ resource "aws_cloudwatch_event_rule" "instanceswitcher" {
   name                = "${var.prefix}-instanceswitcher-${var.schedule_type}-${count.index}"
   description         = "Instance Switcher rule: ${var.schedule_type} [${count.index}]"
   schedule_expression = "cron(${var.schedules[count.index]})"
+
+  event_bus_name = var.event_bus_name
 
   tags = var.tags
 }

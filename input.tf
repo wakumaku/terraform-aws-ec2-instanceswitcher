@@ -45,6 +45,11 @@ variable "policies_path" {
   default     = "/"
 }
 
+variable "event_bus_name" {
+  description = "The event bus to associate with the created rules. If you omit this, the default event bus is used."
+  default     = null
+}
+
 variable "tags" {
   description = "Custom tags to be added to the created resources"
   type        = map(string)
