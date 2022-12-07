@@ -8,12 +8,12 @@ locals {
   ]
 }
 
-module "event_start" {
+module "events" {
   for_each = { for st in local.schedule_types : st => st }
   source   = "./event"
 
   prefix        = var.prefix
-  schedules     = var.schedules.start
+  schedules     = var.schedules[each.value]
   schedule_type = each.value
   instance_list = var.instance_list
   lambda_arn    = aws_lambda_function.instanceswitcher.arn
