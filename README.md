@@ -55,7 +55,12 @@ module "instanceswitcher" {
 }
 ```
 
-This code will create 6 EventBridge Rules, one for each scheduled time, that will execute a lambda to perform the action.
+```text
+Plan: 23 to add, 0 to change, 0 to destroy.
+```
+
+This code will create 5 EventBridge Rules, one for each scheduled time, that will execute a lambda to perform the action.
+
 
 EventBridge Rules:
 
